@@ -1,0 +1,54 @@
+.examListListDiv{
+    height: 90px;
+        overflow: hidden;
+    padding: 15px 30px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+.addNew i{
+    color: #3ED783 ;
+    cursor: pointer;
+    font-size: 24px;
+}
+.ListEdit{
+    cursor: pointer;
+position: absolute;
+top: 5px;
+right: 25px;
+}
+
+.examListEdit i{
+    color: #3ED783 ;
+    cursor: pointer;
+}
+
+.examListDetail{
+    margin-bottom: 0 !important;
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #aaa;
+}
+
+.examListDetailSmall{
+    margin-right: 20px;
+    margin-bottom: 0 !important;
+}
+
+.examListDetail.bold{
+    font-weight: 400 !important;
+}
+
+.examListDetailInput{
+margin-left: 10px;
+}
+
+.detailsContainer{
+    width: calc(100% - 70px);
+    margin-left: 20px;
+}
+
+.maxHeight85 {
+    max-height: calc(100% - 200px);
+}

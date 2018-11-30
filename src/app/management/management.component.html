@@ -1,0 +1,38 @@
+<div class="container-fluid content-margin">
+  <div class="row height100 paddedRow">
+    <div class="boxedDiv shadow">
+      <div class="header">
+        <h4>Manage</h4>
+      </div>
+      <!-- <div class="row">
+        <ul class="nav nav-tabs nav-justified">
+          <li *gcAccessControl="'MGMNT_SCHOOL'" role="presentation" [routerLinkActive]="['active']"><a [routerLink]="['school']">School</a></li>
+          <li *gcAccessControl="'MGMNT_FEE_RULE'" role="presentation" [routerLinkActive]="['active']"><a [routerLink]="['fee-rule']">Fee Rules</a></li>
+          <li *gcAccessControl="'MGMNT_INSTITUTION'" role="presentation" [routerLinkActive]="['active']"><a [routerLink]="['institution']">Institution</a></li>
+          <li *gcAccessControl="'MGMNT_MANAGEMENT'" role="presentation" [routerLinkActive]="['active']"><a [routerLink]="['school-management']">Management</a></li>
+        </ul>
+      </div> -->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <ul class="nav nav-pills">
+        <li role="presentation">
+          <a [routerLink]="['school']">School</a>
+        </li>
+        <li role="presentation">
+          <a [routerLink]="['institution']">Institution</a>
+        </li>
+        <li role="presentation">
+          <a [routerLink]="['school-management']">Management</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>-->

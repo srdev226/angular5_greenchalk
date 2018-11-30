@@ -1,0 +1,51 @@
+  <div class="row rowMain paddedRow">
+    <div class="boxedDiv shadow" >
+      <div class="header">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xs-6">
+            <i class="fa fa-filter" aria-hidden="true"></i>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 nopadding">
+            <div class="input-group formTextGroup paddedGroup darkText text-center">
+              <input type="text" placeholder="Name" class="formTextControl" [(ngModel)]="exam_name" #name="ngModel" (keyup)="0">
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 nopadding">
+            <div class="input-group formTextGroup paddedGroup darkText text-center">
+              <select [(ngModel)]="exam_series_code" #series_code = "ngModel">
+                <option value="All" selected> --Exam Series-- </option>
+                <option *ngFor ="let exam of exam_series_list" [value]="exam.series_code">{{exam.name}} </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 nopadding">
+            <div class="input-group formTextGroup paddedGroup darkText text-center">
+              <select [(ngModel)]="class_info_key" #class_key = "ngModel">
+                <option value="All" selected> --Class-- </option>
+                <option *ngFor ="let class of classes" [value]="class.class_info_key">{{class.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div *gcAccessControl="'ACADEMICS_EXAMS_ADD'" class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+          <i class="icon-plus pull-right" title="Add Exam" (click)="gotoAddExam()" ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row padding10 maxHeight85">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngFor="let exam of (exam_list | searchExam : name.value : series_code.value : class_key.value)">
+      <div class="examListListDiv shadow">
+        <div class="detailsContainer displayInlineBlock">
+          <label class="examListDetail bold">{{exam.name}}</label>
+          <!-- <label class="examListDetailSmall">{{exam.series_code}}</label> -->
+          <label class="examListDetailSmall">Class - {{getClassName(exam.class_key)}}</label>
+          <label class="examListDetailSmall">{{getSubjectName(exam.subject_code)}}</label>
+        </div>
+        <div *gcAccessControl="'ACADEMICS_EXAMS_EDIT'" class="examListEdit displayInlineBlock">
+          <i class="glyphicon glyphicon-eye-open" (click)="goToEditExam(exam.exam_key)"></i>
+        </div>
+      </div>
+    </div>
+  </div>

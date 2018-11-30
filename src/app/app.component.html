@@ -1,0 +1,295 @@
+<div id="wrapper">
+  <header>
+  <nav class="navbar navbar-default navbar-static-top shadow navbar-header fixed-top nav-header" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">
+          <img alt="Greenchalk" src="assets/images/logo_chalk_2.png" height="30" style="width:calc(50% + 50px);">
+        </a>
+      </div>
+      <div class="menu-title" *ngIf="isLoggedIn()">
+        {{curMenuTitle}}
+      </div>
+<!--       <ul class="nav navbar-nav mainNav" *ngIf="isLoggedIn()">
+        <li *gcAccessControl="'DASH'" ><a [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a></li>
+        <li *gcAccessControl="'STUDENT'"><a [routerLink]="['/student']" [routerLinkActive]="['active']">Students</a></li>
+        <li *gcAccessControl="'EMPLOYEE'"><a [routerLink]="['/employee']" [routerLinkActive]="['active']">Employees</a></li>
+        <li *gcAccessControl="'FEE'"><a [routerLink]="['/fee']" [routerLinkActive]="['active']">Fee</a></li>
+        <li *gcAccessControl="'ACADEMICS'"><a [routerLink]="['/academics']" [routerLinkActive]="['active']">Academics</a></li>
+        <li *gcAccessControl="'PAYMENT'"><a [routerLink]="['/payments']" [routerLinkActive]="['active']">Payments</a></li>
+        <li *gcAccessControl="'APPL'"><a [routerLink]="['/applications']" [routerLinkActive]="['active']">Applications</a></li>
+        <li *gcAccessControl="'USER'"><a [routerLink]="['/user']" [routerLinkActive]="['active']">Users</a></li>
+        <li *gcAccessControl="'MGMNT'"><a [routerLink]="['/manage']" [routerLinkActive]="['active']">Management</a></li>
+        <li *gcAccessControl="'TRANSPORT'"><a [routerLink]="['/transport']" [routerLinkActive]="['active']">Transport</a></li>
+      </ul> -->
+
+      <ul class="nav navbar-nav navbar-right positionRel">
+        <li *ngIf="userAccountDataService.getPersonDetails().full_name" (click)="isCollapsed = !isCollapsed">
+          <a class="nopadding pointer">
+            <span class="nameIcon">
+              <label> {{userAccountDataService.getPersonDetails().full_name | slice:0:1}}</label>
+            </span>
+            <h5>{{userAccountDataService.getPersonDetails().full_name}}</h5>
+          </a>
+        </li>
+        <ul class="dropdown-menu open" *ngIf="isCollapsed">
+          <li role="presentation" *ngIf="schoolDataService.getSchool()">
+            <a>{{schoolDataService.getSchool().name}}</a>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li role="presentation" *ngIf="userAccountDataService.getUserAccount().school_key">
+            <a (click)="logout()"><span class="icon-power"></span> Logout</a>
+          </li>
+
+        </ul>
+      </ul> 
+    </div>
+  </nav>
+ 
+    <!-- <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+        <img alt="Greenchalk" src="assets/images/logo_chalk_2.png" height="30">
+      </a>
+    </div> -->
+  </header>
+  <!--The content below is only a placeholder and can be replaced.-->
+  <div class="container-fluid" >
+    <div [ngClass]="{'row': isLoggedIn()}">
+      <div class="row col-sm-0 col-md-0 col-lg-2 profile" *ngIf="isLoggedIn()">
+        <div class="row profile-sidebar" [ngClass]="{'open-menu': isPulled()}">
+          <!-- USER SIDEBAR -->
+          <!-- <ul class="nav navbar-nav navbar-left positionRel sidebar-user">
+            <li *ngIf="userAccountDataService.getPersonDetails().full_name" (click)="isCollapsed = !isCollapsed">
+              <span class="nameIcon">
+                <label> {{userAccountDataService.getPersonDetails().full_name | slice:0:1}}</label>
+              </span>
+              <a class="pointer">
+                <p class="full-name">{{userAccountDataService.getPersonDetails().full_name}}</p>
+              </a>
+              <p class="account">Admin Account</p>
+            </li>
+            <ul class="dropdown-menu open" *ngIf="isCollapsed">
+              <li role="presentation" *ngIf="schoolDataService.getSchool()">
+                <a>{{schoolDataService.getSchool().name}}</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li role="presentation" *ngIf="userAccountDataService.getUserAccount().school_key">
+                <a (click)="logout()"><span class="icon-power"></span> Logout</a>
+              </li>
+    
+            </ul>
+          </ul> -->
+<!--           <div class="sidebar-title">
+            <a href="index.html">
+              <img alt="Greenchalk" src="assets/images/logo_chalk_2.png" height="30">
+            </a>
+          </div> -->
+<!--           <div class="sidebar-user">
+            <span class="nameIcon">
+              <label> {{userAccountDataService.getPersonDetails().full_name | slice:0:1}}</label>
+            </span>
+            <a class="dropdown-toggle pointer user-name" id="dropdown01" data-toggle="dropdown">
+              <p class="full-name">
+                {{userAccountDataService.getPersonDetails().full_name}} 
+                <span class="arrow" style="position:absolute"></span><br>
+              </p>
+              <p class="account">Admin Account</p>
+            </a>
+            <ul class="dropdown-menu">
+              <li role="presentation" *ngIf="schoolDataService.getSchool()">
+                <a>{{schoolDataService.getSchool().name}}</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li role="presentation" *ngIf="userAccountDataService.getUserAccount().school_key">
+                <a (click)="logout()"><span class="icon-power"></span> Logout</a>
+              </li>
+            </ul>
+          </div> -->
+          <!-- END USER SIDEBAR -->
+
+          <!-- SIDEBAR MENU -->
+          <div class="profile-usermenu">
+            <ul class="nav" id="sidebar-menu">
+
+              <li *gcAccessControl="'DASH'" >
+                <a [routerLink]="['/home']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('DASH')}" (click)="onMenuSelect('DASH', 'Home')">
+                  Home
+                </a>
+              </li>
+
+              <li *gcAccessControl="'STUDENT'">
+                <a [routerLink]="['/student']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('STUDENT')}" (click)="onMenuSelect('STUDENT', 'Students')">
+                  Students
+                </a>
+              </li>
+
+              <li *gcAccessControl="'EMPLOYEE'">
+                <a [routerLink]="['/employee']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('EMPLOYEE')}" (click)="onMenuSelect('EMPLOYEE', 'Employees')">
+                  Employees
+                </a>
+              </li>
+
+              <li data-toggle="collapse" data-target="#fee" data-parent="#sidebar-menu" *gcAccessControl="'FEE'">
+                <a [routerLink]="['/fee']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('FEE'), 'smenu-select': isSmenuSelected('FEE')}" (click)="onMenuSelect('FEE', 'Fee')">
+                  Fee<span class="arrow"></span>
+                </a>
+              </li>
+
+              <li>
+                <ul class="nav collapse submenu" id="fee">
+                  <li *gcAccessControl="'FEE_BILLS'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/fee/fee-bill']" [ngClass]="{'menu-select': isMenuSelected('FEE_BILL')}" (click)="onMenuSelect('FEE_BILL', 'Fee Bills')">
+                      <p>Fee Bills</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'FEE_REPORTS'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/fee/fee-report']" [ngClass]="{'menu-select': isMenuSelected('FEE_REP')}" (click)="onMenuSelect('FEE_REP', 'Fee Reports')">
+                      <p>Fee Reports</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li data-toggle="collapse" data-target="#academics" data-parent="#sidebar-menu" *gcAccessControl="'ACADEMICS'">
+                <a [routerLink]="['/academics']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('ACADEMICS'), 'smenu-select': isSmenuSelected('ACADEMICS')}" (click)="onMenuSelect('ACADEMICS', 'Academics')">
+                  Academics<span class="arrow"></span>
+                </a>
+              </li>
+              <li>
+                <ul class="nav collapse submenu" id="academics">
+                  <li *gcAccessControl="'ACADEMICS_CLASSES'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/academics/classes']" [ngClass]="{'menu-select': isMenuSelected('CLA')}" (click)="onMenuSelect('CLA', 'Classes')">
+                      <p>Classes</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'ACADEMICS_PROMOTIONS'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/academics/promotions']" [ngClass]="{'menu-select': isMenuSelected('PRO')}" (click)="onMenuSelect('PRO', 'Promotions')">
+                      <p>Promotions</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'ACADEMICS_ATTENDENCE'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/academics/attendence']" [ngClass]="{'menu-select': isMenuSelected('ATT')}" (click)="onMenuSelect('ATT', 'Attendance')">
+                      <p>Attendance</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'ACADEMICS_ATTENDANCE_REPORT'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/academics/attendance-report']" [ngClass]="{'menu-select': isMenuSelected('REP')}" (click)="onMenuSelect('REP', 'Attendance Report')">
+                      <p>Attendance Report</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'ACADEMICS_EXAMS'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/academics/exams']" [ngClass]="{'menu-select': isMenuSelected('EXM')}" (click)="onMenuSelect('EXM', 'Exams')">
+                      <p>Exams</p></a>
+                  </li>
+                  <li *gcAccessControl="'ACADEMICS_STUDENT_SCORE'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/academics/student_score']" [ngClass]="{'menu-select': isMenuSelected('SCR')}" (click)="onMenuSelect('SCR', 'Student Score')">
+                      <p>Student Score</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li *gcAccessControl="'PAYMENT'">
+                <a [routerLink]="['/payments']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('PAYMENT')}" (click)="onMenuSelect('PAYMENT', 'Payments')">
+                  Payments
+                </a>
+              </li>
+              <li *gcAccessControl="'APPL'">
+                <a [routerLink]="['/applications']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('APPL')}" (click)="onMenuSelect('APPL', 'Applications')">
+                  Applications
+                </a>
+              </li>
+              <li data-toggle="collapse" data-target="#user" data-parent="#sidebar-menu" *gcAccessControl="'USER'">
+                <a [routerLink]="['/user']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('USER'), 'smenu-select': isSmenuSelected('USER')}" (click)="onMenuSelect('USER', 'Users')">
+                  Users<span class="arrow"></span>
+                </a>
+              </li>
+              <li>
+                <ul class="nav collapse submenu" id="user">
+                  <li *gcAccessControl="'USER_LIST'" role="presentation" [routerLinkActive]="['active']">
+                      <a [routerLink]="['/user/list']" [ngClass]="{'menu-select': isMenuSelected('USR_LIST')}" (click)="onMenuSelect('USR_LIST', 'Users')">
+                        <p>Users</p>
+                      </a>
+                    </li>
+                    <li *gcAccessControl="'USER_LIST'" role="presentation" [routerLinkActive]="['active']">
+                      <a [routerLink]="['/user/user_role']" [ngClass]="{'menu-select': isMenuSelected('USR_ROLE')}" (click)="onMenuSelect('USR_ROLE', 'User Roles')">
+                        <p>User Roles</p>
+                      </a>
+                  </li>
+                </ul>
+              </li>
+              <li data-toggle="collapse" data-target="#management" data-parent="#sidebar-menu" *gcAccessControl="'MGMNT'">
+                <a [routerLink]="['/manage']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('MGMNT'), 'smenu-select': isSmenuSelected('MGMNT')}" (click)="onMenuSelect('MGMNT', 'Management')">
+                  Management<span class="arrow"></span>
+                </a>
+              </li>
+              <li>
+                <ul class="nav collapse submenu" id="management">
+                  <li *gcAccessControl="'MGMNT_SCHOOL'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/manage/school']" [ngClass]="{'menu-select': isMenuSelected('SCHL')}" (click)="onMenuSelect('SCHL', 'School')">
+                      <p>School</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'MGMNT_FEE_RULE'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/manage/fee-rule']" [ngClass]="{'menu-select': isMenuSelected('FEE_RULE')}" (click)="onMenuSelect('FEE_RULE', 'Fee Rules')">
+                      <p>Fee Rules</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'MGMNT_INSTITUTION'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/manage/institution']" [ngClass]="{'menu-select': isMenuSelected('INST')}" (click)="onMenuSelect('INST', 'Institution')">
+                      <p>Institution</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'MGMNT_MANAGEMENT'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/manage/school-management']" [ngClass]="{'menu-select': isMenuSelected('SCL_MGNT')}" (click)="onMenuSelect('SCL_MGNT', 'Management')">
+                      <p>Management</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li data-toggle="collapse" data-target="#transport" data-parent="#sidebar-menu" *gcAccessControl="'TRANSPORT'">
+                <a [routerLink]="['/transport']" [routerLinkActive]="['active']" [ngClass]="{'menu-select': isMenuSelected('TRANSPORT'), 'smenu-select': isSmenuSelected('TRANSPORT')}" (click)="onMenuSelect('TRANSPORT', 'Transport')">
+                  Transport<span class="arrow"></span>
+                </a>
+              </li>
+              <li>
+                <ul class="nav collapse submenu" id="transport">
+                  <!-- <li role="presentation" [routerLinkActive]="['active']" *ngIf="isStdKey()">
+                    <a [routerLink]="['/transport/subscription']" [ngClass]="{'menu-select': isMenuSelected('TRAN_SUBS')}" (click)="onMenuSelect('TRAN_SUBS', 'Subscription')">
+                      <p>Subscription</p>
+                    </a>
+                  </li> -->
+                  <li *gcAccessControl="'TRIP_TRANSPORT'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/transport/trips']" [ngClass]="{'menu-select': isMenuSelected('TRAN_TRPS')}" (click)="onMenuSelect('TRAN_TRPS', 'Trips')">
+                      <p>Trips</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'ROUTES_TRANSPORT'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/transport/routes']" [ngClass]="{'menu-select': isMenuSelected('TRAN_RUTS')}" (click)="onMenuSelect('TRAN_RUTS', 'Routes')">
+                      <p>Routes</p>
+                    </a>
+                  </li>
+                  <li *gcAccessControl="'VEHICLE_TRANSPORT'" role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['/transport/vehicle']" [ngClass]="{'menu-select': isMenuSelected('TRAN_VHCL')}" (click)="onMenuSelect('TRAN_VHCL', 'Vehicles')">
+                      <p>Vehicles</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <!-- END MENU -->
+        </div>
+      </div>   
+      <div class="row main-body" [ngClass]="{'col-sm-12 col-md-12 col-lg-10': isLoggedIn()}">
+        <button *ngIf="isLoggedIn()" type="button" class="profile-sidebar-toggle" (click)="pullMenu()">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>  
+        <div (click)="pushMenu()">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
